@@ -1,37 +1,48 @@
-package com.bridgelabz.oops;
+package com.bridgelabz.empwageoops;
 
-public class EmployeeWageComputation {
+import com.bridgelabz.empwageoops.UC6;
+
+public class UC6 {
 
 	public static void main(String[] args) {
-		EmployeeWageComputation e = new EmployeeWageComputation();
+		UC6 e = new UC6();
 		e.empCheck();
+
 	}
-	
 	public void empCheck() {
-//		constants
+	final int IS_PART_TIME = 1;
+	final int IS_FULL_TIME = 2;
+	final int EMP_RATE_PER_HR = 20;
+	final int NO_OF_WORKING_DAYS = 20;
+	final int MAX_HR_PER_MONTH = 100;
+
+		// initializing variable
+	int empHrs = 0;
+	int	totalEmpWage = 0;
+	int	totalEmpHrs = 0;
+	int	totalWorkingDays = 0;
+		// computation
 		
-		int IS_FULL_TIME = 1;
-		int IS_PART_TIME = 2;
-		int EMP_WAGE_PER_HR = 20;
-		int NO_OF_WORKING_DAYS = 20;
-		int empHrs = 0;
-//		GENERATING VALUES 0,1,2 
-		double EMP_CHECK = Math.floor(Math.random() * 10) % 3;
-		
-//		computing emp wage for 20days
-		for (int day = 1; day <= NO_OF_WORKING_DAYS; day++) {
-			
-			if (IS_FULL_TIME == EMP_CHECK) {
-				empHrs=8;
-				
-			}else if (IS_PART_TIME == EMP_CHECK) {
-				empHrs = 4;	
-			}
-			else {
+	while (totalEmpHrs <= MAX_HR_PER_MONTH && totalWorkingDays <NO_OF_WORKING_DAYS) {
+		totalWorkingDays++;
+		int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+		switch (empCheck) {
+			case IS_FULL_TIME:
+				empHrs = 8;
+				break;
+			case IS_PART_TIME:
+				empHrs = 4;
+				break;
+			default:
 				empHrs = 0;
 			}
-		}
-		int empWage = EMP_WAGE_PER_HR * empHrs;
-		System.out.println("Daily Employee Wage is " + empWage);
+		totalEmpHrs += empHrs;
+		System.out.println(" Day: " + totalWorkingDays);
+		System.out.println(" Dailly Employee Hour: " + empHrs);
+		System.out.println(" Total Employee hour: " + totalEmpHrs);
+		System.out.println(" ");
+		}		
+		totalEmpWage = totalEmpHrs * EMP_RATE_PER_HR;
+		System.out.println(" Employee Wages For a Month: " + totalEmpWage);
 	}
 }
