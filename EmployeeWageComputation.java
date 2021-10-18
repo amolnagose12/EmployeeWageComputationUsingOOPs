@@ -1,11 +1,9 @@
-package com.bridgelabz.empwageoops;
+package com.bridgelabz.oops;
 
-import com.bridgelabz.empwageoops.UC6;
-
-public class UC6 {
+public class EmployeeWageComputation {
 
 	public static void main(String[] args) {
-		UC6 e = new UC6();
+		EmployeeWageComputation e = new EmployeeWageComputation();
 		e.empCheck();
 
 	}
