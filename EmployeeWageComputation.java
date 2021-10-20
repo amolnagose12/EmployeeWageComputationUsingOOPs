@@ -2,15 +2,18 @@ package com.bridgelabz;
 
 public class EmployeeWageComputation{
 
+//	constants
 	public static final int IS_PART_TIME  = 1;
 	public static final int IS_FULL_TIME  = 2;
 
+//	initializing variable
 	private final String company;
 	private final int empRatePerHrs;
 	private final int numOfWorkingDays;
 	private final int maxHrsPerMonth;
 	private int totalEmpWage;
 
+//	creating constructor
 	public EmployeeWageComputation(String company, int empRatePerHrs, int numOfWorkingDays, int maxHrsPerMonth){
 
 		this.company = company;
@@ -18,7 +21,8 @@ public class EmployeeWageComputation{
 		this.numOfWorkingDays = numOfWorkingDays;
 		this.maxHrsPerMonth = maxHrsPerMonth;
 	}
-
+	
+//	creating method
 	public void computeEmpWage(){
 
 		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
@@ -55,13 +59,13 @@ public class EmployeeWageComputation{
 	}
 
 	public static void main(String [] args){
-
+//		object CAll
 		 EmployeeWageComputation dmart = new  EmployeeWageComputation("D-mart", 20, 2, 10);
 		 EmployeeWageComputation relince = new  EmployeeWageComputation("Relince", 10, 4, 20);
-		dmart.computeEmpWage();
-		System.out.println(dmart);
+		 dmart.computeEmpWage();
+		 System.out.println(dmart);
 
-		relince.computeEmpWage();
-		System.out.println(relince);
+		 relince.computeEmpWage();
+		 System.out.println(relince);
 	}
 }
