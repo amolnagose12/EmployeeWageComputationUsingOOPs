@@ -1,82 +1,75 @@
 package com.bridgelabz;
 
 import java.util.Random;
+import java.util.ArrayList;
+
 
 //Employee Wage Computation class
 
-class CompanyEmpWage
-{
+class CompanyEmpWage{
 	private  int wagePerHour;
-   	private  double totalWage;	
+    private  double totalWage;	
 	private   int numberOfDays;
 	private  int totalHours;
 	private String Company;
-  
-  CompanyEmpWage(String Company,final int wagePerHour,final int numberOfDays,final int totalHours)
-	{	this.Company=Company;
+    
+    CompanyEmpWage(String Company,final int wagePerHour,final int numberOfDays,final int totalHours){
+    	this.Company=Company;
 		this.wagePerHour=wagePerHour;
-		
 		this.numberOfDays=numberOfDays;
 		this.totalHours=totalHours;
 	}
-  
-  public void settotalWage(double totalWage)
-  {
-  this.totalWage=totalWage;
-  }
-  @Override
-	public String toString()
-	{
-	return "Total Wage of the Person for the "+this.Company+" is "+this.totalWage;
+    
+    public void settotalWage(double totalWage){
+    this.totalWage=totalWage;
+    }
+    
+    @Override
+	public String toString(){
+    	return "Total Wage of the Person for the "+this.Company+" is "+this.totalWage;
 	}
-  public int getnumberOfDays()
-  {
-      return this.numberOfDays;
-  
- }
- public int gettotalHours()
- { return this.totalHours;
- }
- public int getwagePerHour()
- {
+    
+    public int getnumberOfDays(){
+    	return this.numberOfDays;
+    }
+   
+    public int gettotalHours(){
+    	return this.totalHours;
+   }
+   
+    public int getwagePerHour(){
 	   return this.wagePerHour;
- }
- 
+   }
+   
 }
 	   
- 
-
-
-public class EmployeeWageComputation{   
- private static int numOfCompanies=0;
- private CompanyEmpWage[] CompanyWageArray;
-	EmployeeWageComputation()
-	{
-	CompanyWageArray=new CompanyEmpWage[5];
+   public class EmployeeWageComputation{
+	   private static int numOfCompanies=0;
+	   private ArrayList<CompanyEmpWage> CompanyWageList;
+	   EmployeeWageComputation(){
+		   CompanyWageList=new ArrayList<CompanyEmpWage>();
 	}
-  public void addCompany(String Company,final int wagePerHour,final int numberOfDays,final int totalHours)
-  {
-  CompanyEmpWage CompanyEmpWage_Obj=new  CompanyEmpWage(Company,wagePerHour,numberOfDays,numberOfDays);
-	CompanyWageArray[numOfCompanies]=CompanyEmpWage_Obj;
-  numOfCompanies++;
-  }
-  
-  public void computeEmpWage()
-  {
-      for(int i=0;i<this.numOfCompanies;i++)
-      {   double totalWage=computeEmpWageHelper(CompanyWageArray[i]);
-          CompanyWageArray[i].settotalWage(totalWage);
-			System.out.println(CompanyWageArray[i]);
-      }
-  }
-  
-  private double computeEmpWageHelper(CompanyEmpWage CompanyEmpWage_Obj)
-  {//Declaring Random Class
+    private void addCompany(String Company,final int wagePerHour,final int numberOfDays,final int totalHours){
+    	CompanyEmpWage CompanyEmpWage_Obj=new  CompanyEmpWage(Company,wagePerHour,numberOfDays,numberOfDays);
+    	CompanyWageList.add(CompanyEmpWage_Obj);
+    	numOfCompanies++;
+    }
+    
+    private void computeEmpWage()
+    {
+        for(int i=0;i<this.numOfCompanies;i++){
+        	CompanyEmpWage CompanyEmpWage_Obj=CompanyWageList.get(i);
+        	double totalWage=computeEmpWageHelper(CompanyEmpWage_Obj);
+            CompanyWageList.get(i).settotalWage(totalWage);
+			System.out.println(CompanyWageList.get(i));
+        }
+    }
+    
+    private double computeEmpWageHelper(CompanyEmpWage CompanyEmpWage_Obj)
+    {
 		Random rand=new Random();
 		//Genertaing random number in range [0,2]
-		//1-Present
-		//2-PartTime
-		//0-Absent
+		
 		//Looping for 20 days
 		double totalWage=0;
 		int day=0;
@@ -91,39 +84,32 @@ public class EmployeeWageComputation{
 				case 1:
 					fullDayHour+=8;
 					break;
-				case 2:
+
+			case 2:
 					fullDayHour+=4;
 					break;
-				default:
-					System.out.println("Invalid Value");
+			case 0:
+					break;
+			default:
+						System.out.println("Invalid Value");
 			day+=1;
 				
 			}
 		
-			
-			
-				
 		}
 	
 		totalWage=CompanyEmpWage_Obj.getwagePerHour()*fullDayHour;
 		return totalWage;
 		
-		
 	}
 	
 	
-
-
-
-
-
-
-	public static void main(String[] args) 
+ public static void main(String[] args) 
 	
 	{   //creating call objects
 		EmployeeWageComputation e1 =new EmployeeWageComputation();
 		e1.addCompany("Reliance",30,30,120);
-		e1.addCompany("Dmart",20,40,100);
+		e1.addCompany("Dmart",20,50,100);
 		e1.computeEmpWage();
 
 	}
