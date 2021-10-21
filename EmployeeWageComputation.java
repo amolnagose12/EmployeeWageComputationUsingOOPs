@@ -1,6 +1,13 @@
 package com.bridgelabz;
 import java.util.Random;
 
+//Interface 
+interface IComputeWage {
+  public void addCompany(String company, final int wagePerHour, final int numberOfDays, final int totalHours);
+  public void computeEmpWage();
+}
+
+
 //Employee Wage Computation class
 
 class CompanyEmpWage {
@@ -10,28 +17,27 @@ class CompanyEmpWage {
   private int totalHours;
   private String Company;
 
+//  constructor
   CompanyEmpWage(String Company, final int wagePerHour, final int numberOfDays, final int totalHours) {
       this.Company = Company;
       this.wagePerHour = wagePerHour;
       this.numberOfDays = numberOfDays;
       this.totalHours = totalHours;
   }
-  public void settotalWage(double totalWage) {
-      this.totalWage = totalWage;
-  }
 
+//  getter setter
+  public void settotalWage(double totalWage2) {
+      this.totalWage = totalWage2;
+  }
   @Override
   public String toString() {
-
       return "Total Wage of the Person for the " + this.Company + " is " + this.totalWage;
-
   }
   public int getnumberOfDays() {
-
       return this.numberOfDays;
+
   }
   public int gettotalHours() {
-
       return this.totalHours;
   }
   public int getwagePerHour() {
@@ -40,15 +46,15 @@ class CompanyEmpWage {
 
 }
 
-
-
-
-public class EmployeeWageComputation {
+//interface Approch
+public class EmployeeWageComputation implements IComputeWage {
   private static int numOfCompanies = 0;
   private CompanyEmpWage[] CompanyWageArray;
   EmployeeWageComputation() {
       CompanyWageArray = new CompanyEmpWage[5];
   }
+  
+//  creating method
   public void addCompany(String Company, final int wagePerHour, final int numberOfDays, final int totalHours) {
       CompanyEmpWage CompanyEmpWage_Obj = new CompanyEmpWage(Company, wagePerHour, numberOfDays, numberOfDays);
       CompanyWageArray[numOfCompanies] = CompanyEmpWage_Obj;
@@ -73,37 +79,36 @@ public class EmployeeWageComputation {
       double totalWage = 0;
       int day = 0;
       int fullDayHour = 0;
-      
-//      condition Check
       while (day < CompanyEmpWage_Obj.getnumberOfDays() && fullDayHour <= CompanyEmpWage_Obj.gettotalHours()) {
           final int ISPRESENT = rand.nextInt(3);
+
+
           switch (ISPRESENT) {
               case 1:
-                  fullDayHour += 8;
+            	  fullDayHour += 8;
                   break;
               case 2:
-                  fullDayHour += 4;
+            	  fullDayHour += 4;
                   break;
               default:
-                  System.out.println("Invalid Value");
-                  day += 1;
-          }
+            	  fullDayHour += 0;
+                  
+//                  
+            }
       }
 
       totalWage = CompanyEmpWage_Obj.getwagePerHour() * fullDayHour;
       return totalWage;
-
-
   }
 
-
+//  calling main method
   public static void main(String[] args)
 
   { //creating call objects
       EmployeeWageComputation e1 = new EmployeeWageComputation();
       e1.addCompany("Reliance", 30, 30, 120);
       e1.addCompany("Dmart", 20, 40, 100);
-      e1.addCompany("Google", 20, 40, 100);
+      e1.addCompany("Microsoft", 20, 40, 100);
       e1.computeEmpWage();
 
   }
